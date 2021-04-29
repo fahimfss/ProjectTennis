@@ -17,14 +17,13 @@ class ActorNetwork(nn.Module):
 
     def __init__(self, state_size, action_size, seed=10, fc_units=384):
         """Initialize parameters and build model.
-        Params
-        ======
-            state_size (int): Dimension of each state
-            action_size (int): Dimension of each action
-            seed (int): Random seed
-            fc1_units (int): Number of nodes in first hidden layer
-            fc2_units (int): Number of nodes in second hidden layer
+
+        :param state_size: (int), Dimension of each state
+        :param action_size: (int), Dimension of each action
+        :param seed: (int), Random seed
+        :param fc_units: (int), Number of nodes in the first and second hidden layer
         """
+
         super(ActorNetwork, self).__init__()
         self.seed = torch.manual_seed(seed)
         self.fc1 = nn.Linear(state_size, fc_units)
@@ -51,13 +50,13 @@ class CriticNetwork(nn.Module):
 
     def __init__(self, state_size, action_size, seed=10, fcs1_units=512, fc2_units=256, fc3_units=128):
         """Initialize parameters and build model.
-        Params
-        ======
-            state_size (int): Dimension of each state
-            action_size (int): Dimension of each action
-            seed (int): Random seed
-            fcs1_units (int): Number of nodes in the first hidden layer
-            fc2_units (int): Number of nodes in the second hidden layer
+
+        :param state_size: (int), Dimension of each state
+        :param action_size: (int), Dimension of each action
+        :param seed: (int), Random seed
+        :param fcs1_units: (int), Number of nodes in the first hidden layer
+        :param fc2_units: (int), Number of nodes in the second hidden layer
+        :param fc3_units: (int), Number of nodes in the third hidden layer
         """
         super(CriticNetwork, self).__init__()
         self.seed = torch.manual_seed(seed)
@@ -77,7 +76,7 @@ class CriticNetwork(nn.Module):
     def forward(self, state, action):
         """Build a critic (value) network that maps (state, action) pairs -> Q-values."""
         xs = F.leaky_relu(self.fcs1(state))
-        action = self.bn(action)
+        action = self.bn(action)  # Normalizing the action values
         x = torch.cat((xs, action), dim=1)
         x = F.leaky_relu(self.fc2(x))
         x = F.leaky_relu(self.fc3(x))
