@@ -35,11 +35,20 @@ class ActorNetwork(nn.Module):
         self.fc2.weight.data.uniform_(-3e-3, 3e-3)
 
     def forward(self, state):
-        """Build an actor (policy) network that maps states -> actions."""
+        """Maps states -> actions.
+
+        :param state: (PyTorch tensor) A batch of states
+        :returns: PyTorch tensor containing the action values
+        """
         x = F.relu(self.fc1(state))
         return torch.tanh(self.fc2(x))
 
     def get_action(self, state):
+        """Maps states -> actions.
+
+        :param state: (nd-array), A single state
+        :returns: Numpy array containing the action values
+        """
         state = torch.FloatTensor(state).unsqueeze(0).to(device)
         action = self.forward(state)
         return action.squeeze(0).detach().cpu().numpy()
@@ -60,7 +69,6 @@ class CriticNetwork(nn.Module):
         """
         super(CriticNetwork, self).__init__()
         self.seed = torch.manual_seed(seed)
-        self.bn = nn.BatchNorm1d(action_size)
         self.fcs1 = nn.Linear(state_size, fcs1_units)
         self.fc2 = nn.Linear(fcs1_units+action_size, fc2_units)
         self.fc3 = nn.Linear(fc2_units, fc3_units)
@@ -76,7 +84,6 @@ class CriticNetwork(nn.Module):
     def forward(self, state, action):
         """Build a critic (value) network that maps (state, action) pairs -> Q-values."""
         xs = F.leaky_relu(self.fcs1(state))
-        action = self.bn(action)  # Normalizing the action values
         x = torch.cat((xs, action), dim=1)
         x = F.leaky_relu(self.fc2(x))
         x = F.leaky_relu(self.fc3(x))
