@@ -99,25 +99,18 @@ class TennisAgent:
         This method uses the update procedure described in the MADDPG paper.
         """
 
-        sample = self.replay_buffer.sample(BATCH_SIZE)
+        sample, combined_values = self.replay_buffer.sample(BATCH_SIZE)
 
-        combined_state = None           # Combined current state values of each agent
-        combined_action = None          # Combined action values of each agent
-        combined_next_state = None      # Combined next state values of each agent
+        combined_state = combined_values['combined_states']             # Combined current state values of each agent
+        combined_action = combined_values['combined_actions']           # Combined action values of each agent
+        combined_next_state = combined_values['combined_next_states']   # Combined next state values of each agent
         combined_next_action = None     # Combined next action values of each agent, provided by target actors
 
         with torch.no_grad():
             for i in range(self.num_multi_agents):
                 if i == 0:
-                    combined_state = sample[i].states
-                    combined_action = sample[i].actions
-                    combined_next_state = sample[i].next_states
                     combined_next_action = self.target_actor[i](sample[i].next_states)
-
                 else:
-                    combined_state = torch.cat((combined_state, sample[i].states), 1)
-                    combined_action = torch.cat((combined_action, sample[i].actions), 1)
-                    combined_next_state = torch.cat((combined_next_state, sample[i].next_states), 1)
                     combined_next_action = torch.cat((combined_next_action,
                                                       self.target_actor[i](sample[i].next_states)), 1)
 
