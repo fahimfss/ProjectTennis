@@ -7,7 +7,7 @@ from agent import TennisAgent
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-RUN_NAME = "Test1"
+RUN_NAME = "Test2"
 
 # Initializing the Unity Banana environment
 env = UnityEnvironment(file_name="Tennis_Linux_NoVis/Tennis.x86_64", worker_id=1)
