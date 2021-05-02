@@ -65,9 +65,8 @@ The following table contains the summary of the train run:
 |Test1|7651|7743|
 
 Here's a plot of the mean reward over 100 episodes vs episode number:  
-![TennisLog](https://user-images.githubusercontent.com/8725869/116815090-c2a83f80-ab7d-11eb-8bbb-319bef940aba.png)
-
-This plot was created using tensorboard, with log files located at 
+![TennisLog](https://user-images.githubusercontent.com/8725869/116815090-c2a83f80-ab7d-11eb-8bbb-319bef940aba.png)  
+The mean rewads plot image can also be found [here](https://github.com/fahimfss/ProjectTennis/blob/master/log/tensorboard/Test1/tennis_rewards.png). The plot was created using tensorboard, with log files located at 
 "[/log/tensorboard](https://github.com/fahimfss/ProjectTennis/tree/master/log/tensorboard/Test1)".    
 
 Here's a video of [trained agents](https://github.com/fahimfss/ProjectTennis/tree/master/checkpoints) playing in the Tennis environment:  
