@@ -44,7 +44,7 @@ def maddpq():
     while True:
         env_info = env.reset(train_mode=True)[brain_name]
         state = env_info.vector_observations
-        score = 0
+        score = np.array([0.0 for i in range(num_agents)])
 
         while True:
             action = agent.act(state, add_noise=True, step=step)
@@ -58,11 +58,13 @@ def maddpq():
             agent.step(state, action, reward, next_state, done_numpy)
 
             state = next_state
-            score += max(reward)
+            score += np.array(reward)
             step += 1
 
             if np.any(done):
                 break
+
+        score = np.max(score)
 
         if len(scores_window) > 0:
             writer.add_scalar("score_mean_100", np.mean(scores_window), i_episode)
