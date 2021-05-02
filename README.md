@@ -36,7 +36,8 @@ but can be found [here](https://github.com/udacity/deep-reinforcement-learning/t
 ## Instructions
 #### To Train the Agent
 To train the agent, all the files and folders mentioned in the **Project Files**, should be saved in a directory. 
-Then the **sovler.py** file should be run using a python 3 interpreter. Two things to note while running the project for training:
+Then the **[sovler.py](https://github.com/fahimfss/ProjectTennis/blob/master/solver.py)** file should be run using a python 3 interpreter. 
+Two things to note while running the project for training:
 - The **sovler.py** assumes that the Unity ML-Agents Tennis environment is in the same directory as itself. The location of the 
 environment directory can be updated in line no 13 of the **sovler.py** file. 
 - The RUN_NAME (line 10 of **sovler.py**) corresponds to a specific run, 
@@ -45,7 +46,7 @@ Different runs should have different RUN_NAME values.
   
 #### To Run a Trained Agent
 Trained agents (network states) are stored in the checkpoints folder, containing the names **Test1actor1.pth**, **Test1actor2.pth** and **Test1critic.pth**. 
-To run a trained agent, update the RUN_NAME in the **run_trained.py** file (line 8) if necessary and run the **run_trained.py** file using a python 3 interpreter.
+To run a trained agent, update the RUN_ENV_PATH and RUN_NAME in the **[run_trained.py](https://github.com/fahimfss/ProjectTennis/blob/master/run_trained.py)** file (line 7 and 8) if necessary and run the **run_trained.py** file using a python 3 interpreter.
 <br/>  
     
 ## Results
