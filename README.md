@@ -28,9 +28,17 @@ In this project, the environment is considered solved, when an agent is capable 
 <br/>
 
 ## Getting Started
-- The following python libraries are required to run the project: pytorch, numpy, tensorboardx and unityagents
-- The Tennis environment folder is not included in this github project, 
-but can be found [here](https://github.com/udacity/deep-reinforcement-learning/tree/master/p3_collab-compet).
+The easiest way to run this project is to create a conda environment and install necessary libraries. Here're the steps:
+- Create a conda environment using the following code: ```conda create --name RLEnv python=3.6```
+- Then activate the conda environment: ```conda activate RLEnv```
+- Next install pytorch. Pytorch installation codes for conda can be found [here](https://pytorch.org/). I used this code:   
+```conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch```
+- Install unityagents: ```pip install unityagents```
+- Install tensorboardx: ```conda install -c conda-forge tensorboardx```
+- Install protobuf: ```pip install -U protobuf```  
+  
+That's it for installation. The Tennis environment which is not included in this github project is also required. 
+It can be found [here](https://github.com/udacity/deep-reinforcement-learning/tree/master/p3_collab-compet).
 <br/>
 
 ## Instructions
